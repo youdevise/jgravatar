@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
     <groupId>com.github.ralfebert</groupId> 
 	<artifactId>jgravatar</artifactId>
-	<version>1.0</version>
+	<version>1.0-SNAPSHOT</version>
 	<name>jgravatar</name>
 	<url>jgravatar is a tiny Java library for accessing avatar images from gravatar.com</url>
 	<description>jgravatar is a tiny Java library for accessing avatar images from gravatar.com</description>
