@@ -6,4 +6,27 @@
 	<name>jgravatar</name>
 	<url>jgravatar is a tiny Java library for accessing avatar images from gravatar.com</url>
 	<description>jgravatar is a tiny Java library for accessing avatar images from gravatar.com</description>
+	
+	<properties>
+		<commons.codec.version>1.6</commons.codec.version>
+		<commons.io.version>2.1</commons.io.version>
+		<commons.lang.version>2.3</commons.lang.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons.codec.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons.io.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons.lang.version}</version>
+		</dependency>
+	</dependencies>
 </project>	
