@@ -49,6 +49,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @see Gravatar#DEFAULT_RATING
  * @see Gravatar#DEFAULT_DEFAULT_IMAGE
  * 
+ * @author Ralf Ebert
+ * @author Graham Allan 
+ * 
  */
 @Immutable
 public final class Gravatar {
