@@ -1,9 +1,15 @@
-package jgravatar;
-
-import static org.junit.Assert.*;
+package com.timgroup.jgravatar;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.timgroup.jgravatar.Gravatar;
+import com.timgroup.jgravatar.GravatarDefaultImage;
+import com.timgroup.jgravatar.GravatarRating;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class JGravatarTest {
 

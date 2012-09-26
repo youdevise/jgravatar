@@ -1,15 +1,19 @@
-package jgravatar;
+package com.timgroup.jgravatar;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Joiner;
+import com.google.common.hash.Hashing;
+import com.google.common.io.ByteStreams;
+import com.google.common.io.Closeables;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * A gravatar is a dynamic image resource that is requested from the
@@ -45,7 +49,7 @@ public final class Gravatar {
 	 * default size of 80 pixels is used.
 	 */
 	public void setSize(int sizeInPixels) {
-		Validate.isTrue(sizeInPixels >= 1 && sizeInPixels <= 512,
+		checkArgument(sizeInPixels >= 1 && sizeInPixels <= 512,
 				"sizeInPixels needs to be between 1 and 512");
 		this.size = sizeInPixels;
 	}
@@ -54,7 +58,7 @@ public final class Gravatar {
 	 * Specify a rating to ban gravatar images with explicit content.
 	 */
 	public void setRating(GravatarRating rating) {
-		Validate.notNull(rating, "rating");
+		checkNotNull(rating, "rating");
 		this.rating = rating;
 	}
 
@@ -62,7 +66,7 @@ public final class Gravatar {
 	 * Specify the default image to be produced if no gravatar image was found.
 	 */
 	public void setDefaultImage(GravatarDefaultImage defaultImage) {
-		Validate.notNull(defaultImage, "defaultImage");
+	    checkNotNull(defaultImage, "defaultImage");
 		this.defaultImage = defaultImage;
 	}
 
@@ -70,11 +74,11 @@ public final class Gravatar {
 	 * Returns the Gravatar URL for the given email address.
 	 */
 	public String getUrl(String email) {
-		Validate.notNull(email, "email");
+	    checkNotNull(email, "email");
 
 		// hexadecimal MD5 hash of the requested user's lowercased email address
 		// with all whitespace trimmed
-		String emailHash = DigestUtils.md5Hex(email.toLowerCase().trim());
+	    String emailHash = Hashing.md5().hashString(email.toLowerCase().trim(), Charset.forName("UTF-8")).toString();
 		String params = formatUrlParameters();
 		return GRAVATAR_URL + emailHash + ".jpg" + params;
 	}
@@ -89,16 +93,16 @@ public final class Gravatar {
 		try {
 			URL url = new URL(getUrl(email));
 			stream = url.openStream();
-			return IOUtils.toByteArray(stream);
+			return ByteStreams.toByteArray(stream);
 		} catch (FileNotFoundException e) {
 			return null;
 		} catch (Exception e) {
 			throw new GravatarDownloadException(e);
 		} finally {
-			IOUtils.closeQuietly(stream);
+		    Closeables.closeQuietly(stream);
 		}
 	}
-
+	
 	private String formatUrlParameters() {
 		List<String> params = new ArrayList<String>();
 
@@ -112,7 +116,7 @@ public final class Gravatar {
 		if (params.isEmpty())
 			return "";
 		else
-			return "?" + StringUtils.join(params.iterator(), "&");
+		    return "?" + Joiner.on("&").join(params.iterator());
 	}
 
 }

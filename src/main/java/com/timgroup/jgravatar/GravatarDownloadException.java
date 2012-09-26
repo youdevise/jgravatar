@@ -1,4 +1,4 @@
-package jgravatar;
+package com.timgroup.jgravatar;
 
 public class GravatarDownloadException extends RuntimeException {
 
