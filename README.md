@@ -2,6 +2,12 @@
 
 jgravatar is a tiny Java library for accessing avatar images from gravatar.com
 
+This is a fork of the original[https://github.com/ralfebert/jgravatar], offering the following enhancments:
+  - zero dependencies. The small amount of library code that jgravatar depends on is repackaged into the jar
+  - the central class, Gravatar, is immutable
+  - availability from Maven Central (pending)
+
+
 ## Usage example
 
 	Gravatar gravatar = new Gravatar().setSize(50)
