@@ -4,10 +4,9 @@ jgravatar is a tiny Java library for accessing avatar images from gravatar.com
 
 ## Usage example
 
-	Gravatar gravatar = new Gravatar();
-	gravatar.setSize(50);
-	gravatar.setRating(GravatarRating.GENERAL_AUDIENCES);
-	gravatar.setDefaultImage(GravatarDefaultImage.IDENTICON);
+	Gravatar gravatar = new Gravatar().setSize(50)
+	                                  .setRating(GravatarRating.GENERAL_AUDIENCES)
+	                                  .setDefaultImage(GravatarDefaultImage.IDENTICON);
 	String url = gravatar.getUrl("iHaveAn@email.com");
 	byte[] jpg = gravatar.download("info@ralfebert.de");
 

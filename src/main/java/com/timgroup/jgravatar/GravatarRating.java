@@ -10,7 +10,7 @@ public enum GravatarRating {
 
 	XPLICIT("x");
 
-	private String code;
+	private final String code;
 
 	private GravatarRating(String code) {
 		this.code = code;

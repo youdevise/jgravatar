@@ -12,7 +12,7 @@ public enum GravatarDefaultImage {
 
 	HTTP_404("404");
 
-	private String code;
+	private final String code;
 
 	private GravatarDefaultImage(String code) {
 		this.code = code;
