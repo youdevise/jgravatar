@@ -10,7 +10,9 @@ public enum GravatarDefaultImage {
 
 	WAVATAR("wavatar"),
 
-	HTTP_404("404");
+	HTTP_404("404"),
+
+	RETRO("retro");
 
 	private final String code;
 
