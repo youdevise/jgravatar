@@ -91,14 +91,14 @@ public final class Gravatar {
     }
 
     /**
-     * Specify a gravatar size between 1 and 512 pixels. If you omit this, a
+     * Specify a gravatar size between 1 and 2048 pixels. If you omit this, a
      * default size of 80 pixels is used.
      * 
      * @return new instance of Gravatar with given size
      */
     public Gravatar setSize(int sizeInPixels) {
-        checkArgument(sizeInPixels >= 1 && sizeInPixels <= 512,
-                "sizeInPixels needs to be between 1 and 512");
+        checkArgument(sizeInPixels >= 1 && sizeInPixels <= 2048,
+                "sizeInPixels needs to be between 1 and 2048");
         return new Gravatar(sizeInPixels, rating, defaultImage);
     }
 
@@ -173,5 +173,9 @@ public final class Gravatar {
         else
             return "?" + Joiner.on("&").join(params.iterator());
     }
+    
+    public static void main(String[] args) {
+		System.out.println(new Gravatar().getUrl("grundlefleck@gmail.com"));
+	}
 
 }
