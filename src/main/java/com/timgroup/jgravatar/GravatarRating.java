@@ -5,7 +5,7 @@ import javax.annotation.concurrent.Immutable;
 /**
  * Specifies what rating is appropriate for a given request.
  * 
- * @see https://en.gravatar.com/site/implement/images/#rating
+ * @see "https://en.gravatar.com/site/implement/images/#rating"
  */
 @Immutable
 public final class GravatarRating {
@@ -31,7 +31,8 @@ public final class GravatarRating {
 	 * @see GravatarRating#PARENTAL_GUIDANCE_SUGGESTED
 	 * @see GravatarRating#RESTRICTED
 	 * @see GravatarRating#XPLICIT
-	 * 
+	 *
+	 * @param code short code used for the rating
 	 */
 	public GravatarRating(String code) {
 		this.code = code;

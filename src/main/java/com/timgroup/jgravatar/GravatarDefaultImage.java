@@ -5,7 +5,7 @@ import javax.annotation.concurrent.Immutable;
 /**
  * Specifies the default image to use when an email address has no matching Gravatar image.
  * 
- * @see https://en.gravatar.com/site/implement/images/#default-image
+ * @see "https://en.gravatar.com/site/implement/images/#default-image"
  */
 @Immutable
 public final class GravatarDefaultImage {
@@ -49,6 +49,8 @@ public final class GravatarDefaultImage {
 	 * @see GravatarDefaultImage#WAVATAR
 	 * @see GravatarDefaultImage#RETRO
 	 * @see GravatarDefaultImage#BLANK
+	 *
+	 * @param code the default image code
 	 */
 	public GravatarDefaultImage(String code) {
 		this.code = code;

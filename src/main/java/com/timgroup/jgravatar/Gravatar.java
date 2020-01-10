@@ -26,7 +26,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * This class is immutable and thread-safe, Gravatar objects can be shared.
  * 
  * <p>
- * Usage example:<br/>
+ * Usage example:<br>
  * 
  * <pre>
  * <code>
@@ -42,7 +42,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Note, each <code>setX</code> method returns a new instance of
  * <code>Gravatar</code>. The default constructor ({@link #Gravatar()} is
  * equivalent to
- * <code>new Gravatar(DEFAULT_SIZE, DEFAULT_RATING, DEFAULT_DEFAULT_IMAGE);<code>
+ * <code>new Gravatar(DEFAULT_SIZE, DEFAULT_RATING, DEFAULT_DEFAULT_IMAGE);</code>
  * <p>
  * 
  * @see Gravatar#DEFAULT_SIZE
@@ -77,6 +77,12 @@ public final class Gravatar {
     private final GravatarRating rating;
     private final GravatarDefaultImage defaultImage;
 
+    /**
+     *
+     * @param size size in pixels
+     * @param rating rating
+     * @param defaultImage default image
+     */
     public Gravatar(int size, GravatarRating rating, GravatarDefaultImage defaultImage) {
         this.size = size;
         this.rating = rating;
@@ -93,7 +99,8 @@ public final class Gravatar {
     /**
      * Specify a gravatar size between 1 and 2048 pixels. If you omit this, a
      * default size of 80 pixels is used.
-     * 
+     *
+     * @param sizeInPixels size the new Gravatar instance will use
      * @return new instance of Gravatar with given size
      */
     public Gravatar setSize(int sizeInPixels) {
@@ -104,7 +111,8 @@ public final class Gravatar {
 
     /**
      * Specify a rating to ban gravatar images with explicit content.
-     * 
+     *
+     * @param rating rating the new Gravatar instance will use
      * @return new instance of Gravatar with given rating
      */
     public Gravatar setRating(GravatarRating rating) {
@@ -114,7 +122,8 @@ public final class Gravatar {
 
     /**
      * Specify the default image to be produced if no gravatar image was found.
-     * 
+     *
+     * @param defaultImage the default image the new Gravatar instance will use
      * @return new instance of Gravatar with given default image
      */
     public Gravatar setDefaultImage(GravatarDefaultImage defaultImage) {
@@ -124,6 +133,9 @@ public final class Gravatar {
 
     /**
      * Returns the Gravatar URL for the given email address.
+     *
+     * @param email the email address to query for
+     * @return url for the given email address
      */
     public String getUrl(String email) {
         checkNotNull(email, "email");
@@ -142,6 +154,9 @@ public final class Gravatar {
      * Downloads the gravatar for the given URL using Java {@link URL} and
      * returns a byte array containing the gravatar jpg, returns null if no
      * gravatar was found.
+     *
+     * @param email the email address to query for
+     * @return bytes of the jpg image
      */
     public byte[] download(String email) throws GravatarDownloadException {
         InputStream stream = null;
