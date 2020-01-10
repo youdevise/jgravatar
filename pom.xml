@@ -3,7 +3,7 @@
 
   <groupId>com.timgroup</groupId>
   <artifactId>jgravatar</artifactId>
-  <version>1.2</version>
+  <version>1.3-SNAPSHOT</version>
   <name>jgravatar</name>
   <url>jgravatar is a tiny Java library for accessing avatar images from gravatar.com</url>
   <description>jgravatar is a tiny Java library for accessing avatar images from gravatar.com</description>
@@ -23,7 +23,7 @@
     <connection>scm:git:git@github.com:youdevise/jgravatar.git</connection>
     <developerConnection>scm:git:git@github.com:youdevise/jgravatar.git</developerConnection>
     <url>git@github.com:youdevise/jgravatar.git</url>
-    <tag>jgravatar-1.2</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <repositories>
