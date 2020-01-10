@@ -173,9 +173,4 @@ public final class Gravatar {
         else
             return "?" + Joiner.on("&").join(params.iterator());
     }
-    
-    public static void main(String[] args) {
-		System.out.println(new Gravatar().getUrl("grundlefleck@gmail.com"));
-	}
-
 }
