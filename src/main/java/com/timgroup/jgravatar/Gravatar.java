@@ -24,39 +24,40 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * gravatar images. See http://en.gravatar.com/site/implement/url .
  * </p>
  * This class is immutable and thread-safe, Gravatar objects can be shared.
- * 
+ *
  * <p>
  * Usage example:<br>
- * 
+ *
  * <pre>
  * <code>
  * Gravatar gravatar = new Gravatar().setSize(50)
  *                                   .setRating(GravatarRating.GENERAL_AUDIENCES)
  *                                   .setDefaultImage(GravatarDefaultImage.IDENTICON);
- *                                   
+ *
  * String url = gravatar.getUrl("iHaveAn@email.com");
  * byte[] jpg = gravatar.download("info@ralfebert.de");
  * </code>
  * </pre>
- * 
+ *
  * Note, each <code>setX</code> method returns a new instance of
  * <code>Gravatar</code>. The default constructor ({@link #Gravatar()} is
  * equivalent to
  * <code>new Gravatar(DEFAULT_SIZE, DEFAULT_RATING, DEFAULT_DEFAULT_IMAGE);</code>
  * <p>
- * 
+ *
  * @see Gravatar#DEFAULT_SIZE
  * @see Gravatar#DEFAULT_RATING
  * @see Gravatar#DEFAULT_DEFAULT_IMAGE
- * 
+ *
  * @author Ralf Ebert
- * @author Graham Allan 
- * 
+ * @author Graham Allan
+ *
  */
 @Immutable
 public final class Gravatar {
 
     private final static String GRAVATAR_URL = "http://www.gravatar.com/avatar/";
+    private final static String GRAVATAR_HTTPS_URL = "https://www.gravatar.com/avatar/";
 
     /**
      * Default choice for size of image.
@@ -73,27 +74,43 @@ public final class Gravatar {
      */
     public static final GravatarDefaultImage DEFAULT_DEFAULT_IMAGE = GravatarDefaultImage.HTTP_404;
 
+    /**
+     * Default choice for size of image.
+     */
+    public final static Boolean DEFAULT_HTTPS = Boolean.FALSE;
+
     private final int size;
     private final GravatarRating rating;
     private final GravatarDefaultImage defaultImage;
+    private final Boolean https;
 
     /**
      *
      * @param size size in pixels
      * @param rating rating
      * @param defaultImage default image
+     * @param https is https enabled
      */
-    public Gravatar(int size, GravatarRating rating, GravatarDefaultImage defaultImage) {
+    public Gravatar(int size, GravatarRating rating, GravatarDefaultImage defaultImage, Boolean https) {
         this.size = size;
         this.rating = rating;
         this.defaultImage = defaultImage;
+        this.https = https;
     }
 
     /**
      * Creates a new Gravatar instance using the default settings.
      */
     public Gravatar() {
-        this(DEFAULT_SIZE, DEFAULT_RATING, DEFAULT_DEFAULT_IMAGE);
+        this(DEFAULT_SIZE, DEFAULT_RATING, DEFAULT_DEFAULT_IMAGE, DEFAULT_HTTPS);
+    }
+
+
+    /**
+     * Creates a new Gravatar instance using the default settings but specifying if https is enabled.
+     */
+    public Gravatar(Boolean https) {
+        this(DEFAULT_SIZE, DEFAULT_RATING, DEFAULT_DEFAULT_IMAGE, https);
     }
 
     /**
@@ -106,7 +123,7 @@ public final class Gravatar {
     public Gravatar setSize(int sizeInPixels) {
         checkArgument(sizeInPixels >= 1 && sizeInPixels <= 2048,
                 "sizeInPixels needs to be between 1 and 2048");
-        return new Gravatar(sizeInPixels, rating, defaultImage);
+        return new Gravatar(sizeInPixels, rating, defaultImage,https);
     }
 
     /**
@@ -117,7 +134,7 @@ public final class Gravatar {
      */
     public Gravatar setRating(GravatarRating rating) {
         checkNotNull(rating, "rating");
-        return new Gravatar(size, rating, defaultImage);
+        return new Gravatar(size, rating, defaultImage,https);
     }
 
     /**
@@ -128,7 +145,7 @@ public final class Gravatar {
      */
     public Gravatar setDefaultImage(GravatarDefaultImage defaultImage) {
         checkNotNull(defaultImage, "defaultImage");
-        return new Gravatar(size, rating, defaultImage);
+        return new Gravatar(size, rating, defaultImage,https);
     }
 
     /**
@@ -147,7 +164,10 @@ public final class Gravatar {
                                   .toString();
         
         String params = formatUrlParameters();
-        return GRAVATAR_URL + emailHash + ".jpg" + params;
+
+        String urlParams = emailHash + ".jpg" + params;
+
+        return https ? (GRAVATAR_HTTPS_URL + urlParams) : (GRAVATAR_URL + urlParams);
     }
 
     /**
