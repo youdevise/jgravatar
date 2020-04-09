@@ -18,6 +18,10 @@ This is a fork of the [original](https://github.com/ralfebert/jgravatar), offeri
 
 ## License
 
+You can use jgravatar under the terms of the BSD or the LGPL license:
+
+### BSD license
+
 Copyright (c) 2010, Ralf Ebert
 All rights reserved.
 
